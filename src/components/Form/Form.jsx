@@ -5,12 +5,13 @@ import './Form.css'
 import Alert from '../Alert/Alert'; 
 
 const Form = ({ onSubmit }) => {
+  //Estados com os campos de uma passagem
   const [origem, setOrigem] = useState('');
   const [destino, setDestino] = useState('');
   const [preco, setPreco] = useState('');
   const [poltrona, setPoltrona] = useState('');
   const [data, setData] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState(''); //Estado que guarda uma mensagem de erro para ser exibida no alert
 
   const handleSubmit = (e) => {
     e.preventDefault();
