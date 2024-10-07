@@ -7,9 +7,10 @@ import Form from "./components/Form/Form";
 import "./App.css";
 
 const App = () => {
-  const [passagens, setPassagens] = useState([]);  //Estado das passagens disponiveis no sistema
+  const [saldo, setSaldo] = useState(300); //Estado do valor disponível para o cliente gastar em passagens
+  const [passagens, setPassagens] = useState([]); //Estado das passagens disponiveis no sistema
   const [compradas, setCompradas] = useState([]); //Estado das passagens compradas
-  const [message, setMessage] = useState(""); // Estado do alert
+  const [message, setMessage] = useState(""); // Estado do das mensagens exibidas no alert
 
   useEffect(() => {
     updatePassagens();
@@ -22,13 +23,21 @@ const App = () => {
       .then((data) => setPassagens(data));
   };
 
+  //Realiza a compra de uma passagem e remove a mesma da lista de passagens disponíveis
   const handleCompra = (id) => {
     const passagemComprada = passagens.find((p) => p.id === id);
-    if (passagemComprada) {
-      setCompradas([...compradas, passagemComprada]);
-      setMessage("Passagem comprada com sucesso!");
-      handleDeletar(id);
+    if (!passagemComprada) {
+      setMessage(`Passagem com o id ${id} não encontrada!`);
+      return;
     }
+    if (passagemComprada.preco > saldo) {
+      setMessage("Compra abortada! Saldo insuficiente.");
+      return;
+    }
+    setSaldo(saldo - passagemComprada.preco);
+    setCompradas([...compradas, passagemComprada]);
+    setMessage("Passagem comprada com sucesso!");
+    handleDeletar(id);
   };
 
   // Realiza uma requisicao DELETE para a API após uma passagem ser comprada pelo cliente e atualiza a lista
@@ -39,7 +48,7 @@ const App = () => {
     updatePassagens();
   };
 
-  // Realiza uma requisicao POST para cadastrar uma nova passagem 
+  // Realiza uma requisicao POST para cadastrar uma nova passagem
   const handleCadastrar = (novaPassagem) => {
     fetch("http://localhost:3001/passagens", {
       method: "POST",
@@ -57,7 +66,10 @@ const App = () => {
 
   return (
     <>
-      <Header>Encontre e compre passagens de forma simples e rápida!</Header>
+      <Header>
+        <p>Encontre e compre passagens de forma simples e rápida!</p>
+        <p>Saldo do cliente: {saldo} reais</p>
+      </Header>
       <div className="container">
         <Form onSubmit={handleCadastrar} />
         {message && <Alert message={message} />}

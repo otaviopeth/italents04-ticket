@@ -16,7 +16,7 @@ const Form = ({ onSubmit }) => {
     e.preventDefault();
 
     // Validação dos campos
-    if (!origem || !destino || !preco || !data) {
+    if (!origem || !destino || !preco || !poltrona || !data) {
       setErrorMessage('Preencha todos os campos.'); 
       return;
     }

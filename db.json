@@ -4,7 +4,7 @@
       "id": "1",
       "origem": "Belo Horizonte",
       "destino": "Salvador",
-      "preco": 150,
+      "preco": 150.00,
       "poltrona": 30,
       "data": "2024-11-01"
     }
