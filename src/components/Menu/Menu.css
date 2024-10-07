@@ -1,0 +1,29 @@
+.nav-container {
+  position: absolute;
+    bottom: 20px;
+    right: 100px; 
+}
+
+.menu {
+  display: flex;
+  gap: 20px; /* espaço entre os links */
+}
+
+.menu a {
+
+  background-color: white;
+  font-weight: bold;
+  color: var(--cor-primaria); /* cor do texto do menu */
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px;
+  border: 2px solid white; /* Borda branca */
+  border-radius: 25px; /* Bordas arredondadas */
+  transition: color 0.3s;
+
+}
+
+.menu a:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-decoration: underline;
+}

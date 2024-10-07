@@ -1,0 +1,12 @@
+{
+  "passagens": [
+    {
+      "id": "1",
+      "origem": "Belo Horizonte",
+      "destino": "Salvador",
+      "preco": 150,
+      "poltrona": 30,
+      "data": "2024-11-01"
+    }
+  ]
+}
